@@ -1,12 +1,12 @@
 import './style.css';
 const searchInput = document.getElementById('search');
-const countryList = document.getElementByI('country-list');
+const countryList = document.getElementById('country-list');
 const card = document.getElementById('card');
-const pre = document.getElementByI('pre');
-const next = document.getElementByI('next');
+const previous = document.getElementById('pre');
+const next = document.getElementById('next');
 let BASE_URL = 'http://localhost:3000';
-let endPoint = `countries?_page=1&_limit=5}`
 let page = 1;
+let endPoint = `countries?_page=1&_limit=5`;
 async function getdata(url, endpoint) {
   try {
     let resronse = await fetch(`${url}/${endpoint}`);
@@ -22,8 +22,8 @@ data.then((response) => renderAside(response));
 function renderAside(params) {
   countryList.innerHTML = '';
   params.map((item) => {
-    countryList.innerHTML += `<li data-name=${item.name.common} 
-        class="bg-[#7F8487] rounded-r-md py-2 hover:shadow-sm hover:shadow-white flex gap-8 items-center justify-between px-4 cursor-pointer text-center"
+    let li = `<li data-name=${item.name.common} 
+      class="bg-[#7F8487] rounded-r-md py-2 hover:shadow-sm hover:shadow-white flex gap-8 items-center justify-between px-4 cursor-pointer text-center"
       >
         <span>${item.name.common}</span>
         <div class="w-24 h-16">
@@ -31,8 +31,9 @@ function renderAside(params) {
             src=${item.flags.png}
            alt=""
           />
-        </div>
-      </li>`;
+          </div>
+          </li>`;
+    countryList.innerHTML += li;
   });
 }
 function handleSearch(e) {
@@ -85,3 +86,19 @@ function handleCard(e) {
 }
 countryList.addEventListener('click', handleCard);
 searchInput.addEventListener('keyup', handleSearch);
+previous.addEventListener('click', () => {
+  --page < 1 ? 1 : page;
+  endPoint = `&_page=${page}&_limit=5`;
+  data = getdata(BASE_URL, endPoint);
+  data.then((response) => {
+    renderAside(response);
+  });
+});
+next.addEventListener('click', () => {
+  ++page > 50 ? 50 : page;
+  endPoint = `&_page=${page}&_limit=5`;
+  data = getdata(BASE_URL, endPoint);
+  data.then((response) => {
+    renderAside(response);
+  });
+});
