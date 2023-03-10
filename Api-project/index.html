@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app" class="bg-[#222222] w-full h-full">
+      <div class="flex flex-col justify-center items-center py-5 gap-2">
+        <div class="font-lobster text-white text-3xl">
+          Search . Find . Learn
+        </div>
+        <div class="w-10/12 px-4">
+          <input
+            id="search"
+            type="text"
+            class="w-full bg-[#434242] outline-none text-white p-2 rounded-md placeholder:text-white pl-4"
+            placeholder="search a Country ...."
+          />
+        </div>
+      </div>
+      <main class="font-Comfortaa flex gap-12 w-full my-16">
+        <div class="flex flex-col gap-4 w-1/4">
+          <h2 class="text-white px-8 mx-auto">Countries</h2>
+          <ul id="country-list">
+            <li
+              class="bg-[#7F8487] rounded-r-md py-2 hover:shadow-sm hover:shadow-white flex gap-8 items-center justify-center cursor-pointer text-center"
+            >
+              <span>united state</span>
+              <div class="w-24 h-full">
+                <img
+                  src="./public/assets/img/Flag-United-States-of-America.webp"
+                  alt=""
+                />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="flex justify-center items-center w-3/4">
+          <div
+            id="card"
+            class="bg-[#DED3CA] bg-opacity-70 rounded-md relative flex flex-col px-3 py-4 text-center w-[60%]"
+          >
+            <figure class="absolute top-[-50px] -translate-x-1/2 left-1/2">
+              <img
+                class="rounded-full w-24 h-24"
+                src="./public/assets/img/Flag-United-States-of-America.webp"
+                alt=""
+                srcset=""
+              />
+            </figure>
+            <div class="flex flex-col items-center justify-center py-16 gap-5">
+              <div>
+                <h2 class="font-bold text-xl">united state</h2>
+                <p class="font-semibold text-gray-700">North America</p>
+              </div>
+              <div>
+                <p class="font-bold">Capital :</p>
+                <span>Washengton D.C</span>
+              </div>
+              <div>
+                <p class="font-bold">Area code :</p>
+                <span>+1</span>
+              </div>
+              <div>
+                <p class="font-bold">Neighbors :</p>
+                <span>Canada and Mexico</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

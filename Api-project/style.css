@@ -1,0 +1,21 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body , html {
+  width: 100%;
+  height: 100%;
+}
+@font-face {
+  font-family: "lobster";
+  src: url(./public/assets/Fonts/Lobster-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Comfortaa";
+  src: url(./public/assets/Fonts/Comfortaa-VariableFont_wght.ttf);
+}
+/* .font-lobster {
+  font-family: 'Lobster';
+} */
