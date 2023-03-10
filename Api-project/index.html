@@ -21,20 +21,23 @@
         </div>
       </div>
       <main class="font-Comfortaa flex gap-12 w-full my-16">
-        <div class="flex flex-col gap-4 w-1/4">
+        <div class="flex flex-col gap-4 w-1/4 overflow-hidden">
           <h2 class="text-white px-8 mx-auto">Countries</h2>
-          <ul id="country-list">
-            <li
+          <ul
+            class="h-[350px] overflow-y-scroll flex flex-col gap-4 scrollbar-hide"
+            id="country-list"
+          >
+            <!-- <li
               class="bg-[#7F8487] rounded-r-md py-2 hover:shadow-sm hover:shadow-white flex gap-8 items-center justify-center cursor-pointer text-center"
             >
               <span>united state</span>
               <div class="w-24 h-full">
                 <img
-                  src="./public/assets/img/Flag-United-States-of-America.webp"
+                  src="./assets/img/Flag-United-States-of-America.webp"
                   alt=""
                 />
               </div>
-            </li>
+            </li> -->
           </ul>
         </div>
         <div class="flex justify-center items-center w-3/4">
@@ -45,7 +48,7 @@
             <figure class="absolute top-[-50px] -translate-x-1/2 left-1/2">
               <img
                 class="rounded-full w-24 h-24"
-                src="./public/assets/img/Flag-United-States-of-America.webp"
+                src="./assets/img/Flag-United-States-of-America.webp"
                 alt=""
                 srcset=""
               />
