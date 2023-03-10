@@ -9,12 +9,12 @@ body , html {
 }
 @font-face {
   font-family: "lobster";
-  src: url(./public/assets/Fonts/Lobster-Regular.ttf);
+  src: url(./assets/Fonts/Lobster-Regular.ttf);
 }
 
 @font-face {
   font-family: "Comfortaa";
-  src: url(./public/assets/Fonts/Comfortaa-VariableFont_wght.ttf);
+  src: url(./assets/Fonts/Comfortaa-VariableFont_wght.ttf);
 }
 /* .font-lobster {
   font-family: 'Lobster';
