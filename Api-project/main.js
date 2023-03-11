@@ -4,9 +4,12 @@ const countryList = document.getElementById('country-list');
 const card = document.getElementById('card');
 const previous = document.getElementById('pre');
 const next = document.getElementById('next');
+const sort = document.getElementById('sort');
 let BASE_URL = 'http://localhost:3000';
+let URL = BASE_URL + '/countries?';
+let isSorted = false;
 let page = 1;
-let endPoint = `countries?_page=1&_limit=5`;
+let endPoint = `?_page=1&_limit=5`;
 async function getdata(url, endpoint) {
   try {
     let resronse = await fetch(`${url}/${endpoint}`);
@@ -16,13 +19,13 @@ async function getdata(url, endpoint) {
     console.log(error);
   }
 }
-let data = getdata(BASE_URL, endPoint);
+let data = getdata(URL, endPoint);
 data.then((response) => renderAside(response));
 
 function renderAside(params) {
   countryList.innerHTML = '';
   params.map((item) => {
-    let li = `<li data-name=${item.name.common} 
+    let li = `<li data-name=${item.name.common.split(' ').join('-')} 
       class="bg-[#7F8487] rounded-r-md py-2 hover:shadow-sm hover:shadow-white flex gap-8 items-center justify-between px-4 cursor-pointer text-center"
       >
         <span>${item.name.common}</span>
@@ -49,16 +52,21 @@ function handleSearch(e) {
 }
 function handleCard(e) {
   let target = e.target;
-  if (!target.dataset.name) return;
+  if (!target.closest('li')) return;
   data.then((response) => {
     const targetItem = response.find(
-      (item) => item.name.common === target.dataset.name
+      (item) => item.name.common.split(' ').join('-') === target.dataset.name
     );
+    console.log(targetItem);
+    console.log(target.dataset.name);
     card.innerHTML = `
     <figure class="absolute top-[-50px] -translate-x-1/2 left-1/2">
               <img
                 class="rounded-full w-24 h-24"
-                src=${targetItem.flags.png}
+                src=${
+                  targetItem.flags.png ||
+                  './assets/img/Flag-United-States-of-America.webp'
+                }
                 alt=""
                 srcset=""
               />
@@ -78,7 +86,7 @@ function handleCard(e) {
               </div>
               <div>
                 <p class="font-bold">Neighbors :</p>
-                <span>${targetItem.borders?.join(' , ')}</span>
+                <span>${targetItem.borders?.join(' , ') || ''}</span>
               </div>
             </div>
     `;
@@ -89,7 +97,7 @@ searchInput.addEventListener('keyup', handleSearch);
 previous.addEventListener('click', () => {
   --page < 1 ? 1 : page;
   endPoint = `&_page=${page}&_limit=5`;
-  data = getdata(BASE_URL, endPoint);
+  data = getdata(URL, endPoint);
   data.then((response) => {
     renderAside(response);
   });
@@ -97,7 +105,18 @@ previous.addEventListener('click', () => {
 next.addEventListener('click', () => {
   ++page > 50 ? 50 : page;
   endPoint = `&_page=${page}&_limit=5`;
-  data = getdata(BASE_URL, endPoint);
+  data = getdata(URL, endPoint);
+  data.then((response) => {
+    renderAside(response);
+  });
+});
+sort.addEventListener('click', () => {
+  SortRevers = SortRevers === 'asc' ? 'desc' : 'asc'
+  isSorted = !isSorted;
+  URL = isSorted
+    ? BASE_URL + '/countries?' + `_sort=name.common&_order=asc`
+    : BASE_URL + '/countries?'
+  data = getdata(URL, endPoint);
   data.then((response) => {
     renderAside(response);
   });
