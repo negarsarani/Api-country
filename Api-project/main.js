@@ -8,6 +8,7 @@ const sort = document.getElementById('sort');
 let BASE_URL = 'http://localhost:3000';
 let URL = BASE_URL + '/countries?';
 let isSorted = false;
+let SortRevers = false;
 let page = 1;
 let endPoint = `?_page=1&_limit=5`;
 async function getdata(url, endpoint) {
@@ -52,13 +53,12 @@ function handleSearch(e) {
 }
 function handleCard(e) {
   let target = e.target;
+  console.log(target);
   if (!target.closest('li')) return;
   data.then((response) => {
     const targetItem = response.find(
       (item) => item.name.common.split(' ').join('-') === target.dataset.name
     );
-    console.log(targetItem);
-    console.log(target.dataset.name);
     card.innerHTML = `
     <figure class="absolute top-[-50px] -translate-x-1/2 left-1/2">
               <img
@@ -111,11 +111,17 @@ next.addEventListener('click', () => {
   });
 });
 sort.addEventListener('click', () => {
-  SortRevers = SortRevers === 'asc' ? 'desc' : 'asc'
   isSorted = !isSorted;
-  URL = isSorted
-    ? BASE_URL + '/countries?' + `_sort=name.common&_order=asc`
-    : BASE_URL + '/countries?'
+  if (isSorted && SortRevers) {
+    URL = BASE_URL + '/countries?' + `_sort=name.common&_order=desc`;
+    SortRevers = false;
+  } else if (isSorted) {
+    URL = BASE_URL + '/countries?' + `_sort=name.common&_order=desc`;
+    SortRevers = true;
+  } else {
+    URL = BASE_URL + '/countries?';
+  }
+
   data = getdata(URL, endPoint);
   data.then((response) => {
     renderAside(response);

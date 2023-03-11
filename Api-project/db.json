@@ -26848,5 +26848,6 @@
       "capitalInfo": { "latlng": [2.07, 45.33] },
       "postalCode": { "format": "@@  #####", "regex": "^([A-Z]{2}\\d{5})$" }
     }
-  ]
+  ],
+  "Users": []
 }
